@@ -40,5 +40,6 @@ setup(
     packages=["accepton"],
     include_package_data=True,
     zip_safe=False,
+    install_requires=["requests >= 2.1.0"],
     test_suite="tests",
 )
