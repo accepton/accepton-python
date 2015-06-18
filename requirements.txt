@@ -1,2 +1,1 @@
-httpretty>=0.8.10
 requests>=2.1.0
