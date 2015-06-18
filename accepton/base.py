@@ -1,3 +1,13 @@
+from datetime import datetime
+
+DEFAULTS = {
+    datetime: None,
+    dict: {},
+    int: None,
+    str: None,
+}
+
+
 class Base(object):
     def __init__(self, attrs={}):
         self.attrs = attrs
@@ -7,8 +17,8 @@ class Base(object):
         return "%s(%s)" % (self.__class__.__name__, ", ".join(attrs))
 
     def initialize_attr(self, attr, data_type):
-        if attr not in self.attrs:
-            setattr(self, attr, None)
+        if attr not in self.attrs or self.attrs[attr] is None:
+            setattr(self, attr, DEFAULTS[data_type])
             return
 
         if isinstance(self.attrs[attr], data_type):
