@@ -1,9 +1,10 @@
+from .api.tokenization import Tokenization
 from .version import VERSION
 
 __all__ = ["Client"]
 
 
-class Client(object):
+class Client(Tokenization):
     def __init__(self, api_key=None, environment="production"):
         self.api_key = api_key
         self.environment = environment

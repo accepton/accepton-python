@@ -2,6 +2,7 @@ try:
     from urlparse import urlparse
 except ImportError:
     from urllib.parse import urlparse
+import dateutil.parser
 import requests
 from .error import error_from_response
 from .headers import Headers
@@ -22,7 +23,7 @@ class Request(object):
         url = URLS[options.pop("environment")]
         self.client = client
         self.request_method = request_method
-        self.uri = urlparse(path if path.startswith('http') else url + path)
+        self.uri = urlparse(path if path.startswith("http") else url + path)
         self.options = options
         self.headers = Headers(client).request_headers()
 
@@ -31,12 +32,18 @@ class Request(object):
                                     self.uri.geturl(),
                                     headers=self.headers,
                                     json=self.options)
-        response_body = Response(response.json())
+        response_body = Response(response.json(object_hook=self.__deserialize))
         return self.__fail_or_return_response_body(response_body,
                                                    response.status_code)
 
     def __default_options(self):
         return {"environment": "production"}
+
+    def __deserialize(self, response):
+        if "created" in response:
+            response["created"] = dateutil.parser.parse(response["created"])
+
+        return response
 
     def __fail_or_return_response_body(self, body, status_code):
         error = error_from_response(body, status_code)
