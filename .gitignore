@@ -6,4 +6,5 @@
 .tox
 /dist
 /build
+/coverage
 eggs
