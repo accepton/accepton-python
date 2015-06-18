@@ -1,7 +1,7 @@
 AcceptOn
 ========
 
-TODO: Write an introduction.
+Please see http://developers.accepton.com for more information.
 
 Installation
 ------------
@@ -23,7 +23,13 @@ You may need to run the above commands with ``sudo``.
 
 .. _pip: http://www.pip-installer.org/en/latest/
 
-Usage
------
+Contributing
+------------
 
-TODO: Write usage instructions here.
+1. Fork it
+2. Create your feature branch (``git checkout -b my-new-feature``)
+3. Run the test suite on all supported Pythons (``tox``)
+4. Run the code linter to find style violations (``tox -e pep8``)
+5. Commit your changes (``git commit -am 'Add some feature'``)
+6. Push the branch (``git push origin my-new-feature``)
+7. Create a new Pull Request
