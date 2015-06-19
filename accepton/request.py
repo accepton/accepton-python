@@ -12,6 +12,7 @@ __all__ = ["Request"]
 
 URLS = {
     "development": "http://checkout.accepton.dev",
+    "staging": "https://staging-checkout.accepton.com",
     "production": "https://checkout.accepton.com"
 }
 
