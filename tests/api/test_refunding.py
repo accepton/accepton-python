@@ -10,7 +10,7 @@ from tests import fixture_response
 class SuccessfulRefundTest(unittest.TestCase):
     def setUp(self):
         self.client = Client(api_key="skey_123")
-        self.params = {"amount": 100, "authorization_id": "chg_123"}
+        self.params = {"amount": 100, "charge_id": "chg_123"}
         httpretty.enable()
         httpretty.register_uri(httpretty.POST,
                                "https://checkout.accepton.com/v1/refunds",
