@@ -41,8 +41,9 @@ class Request(object):
         return {"environment": "production"}
 
     def __deserialize(self, response):
-        if "created" in response:
-            response["created"] = dateutil.parser.parse(response["created"])
+        for attr in ["created", "created_at"]:
+            if attr in response:
+                response[attr] = dateutil.parser.parse(response[attr])
 
         return response
 

@@ -1,0 +1,6 @@
+{
+  "error": {
+    "type": "invalid_charge_id",
+    "message": "There is no charge with that ID."
+  }
+}

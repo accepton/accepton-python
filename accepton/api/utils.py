@@ -10,6 +10,12 @@ class Utils(object):
 
         return dict((k, v) for k, v in args.items() if v)
 
+    def perform_get_with_object(self, path, params, klass):
+        return self.perform_request_with_object('get', path, params, klass)
+
+    def perform_get_with_objects(self, path, params, klass):
+        return self.perform_request_with_objects('get', path, params, klass)
+
     def perform_post_with_object(self, path, params, klass):
         return self.perform_request_with_object('post', path, params, klass)
 
@@ -21,6 +27,11 @@ class Utils(object):
     def perform_request_with_object(self, request_method, path, params, klass):
         response = self.perform_request(request_method, path, params)
         return klass(response)
+
+    def perform_request_with_objects(self, request_method, path, params,
+                                     klass):
+        response = self.perform_request(request_method, path, params)
+        return [klass(element) for element in response['data']]
 
     def _with_environment(self, params):
         copy = params.copy()
