@@ -2,7 +2,7 @@ import os
 
 
 def fixture_response(path):
-    return open(os.path.join(
-        os.path.dirname(__file__),
-        'fixtures',
-        path)).read()
+    with open(os.path.join(os.path.dirname(__file__),
+                           'fixtures',
+                           path)) as fixture:
+        return fixture.read()
