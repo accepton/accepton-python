@@ -10,6 +10,9 @@ class Utils(object):
 
         return dict((k, v) for k, v in args.items() if v)
 
+    def perform_delete_with_object(self, path, params, klass):
+        return self.perform_request_with_object('delete', path, params, klass)
+
     def perform_get_with_object(self, path, params, klass):
         return self.perform_request_with_object('get', path, params, klass)
 
@@ -18,6 +21,9 @@ class Utils(object):
 
     def perform_post_with_object(self, path, params, klass):
         return self.perform_request_with_object('post', path, params, klass)
+
+    def perform_put_with_object(self, path, params, klass):
+        return self.perform_request_with_object('put', path, params, klass)
 
     def perform_request(self, request_method, path, params):
         request = Request(self, request_method, path,

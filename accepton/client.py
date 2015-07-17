@@ -1,3 +1,4 @@
+from .api.promotion import Promotion
 from .api.querying import Querying
 from .api.refunding import Refunding
 from .api.tokenization import Tokenization
@@ -6,7 +7,7 @@ from .version import VERSION
 __all__ = ["Client"]
 
 
-class Client(Querying, Refunding, Tokenization):
+class Client(Promotion, Querying, Refunding, Tokenization):
     def __init__(self, api_key=None, environment="production"):
         self.api_key = api_key
         self.environment = environment

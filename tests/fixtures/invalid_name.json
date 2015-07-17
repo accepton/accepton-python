@@ -1,0 +1,6 @@
+{
+  "error": {
+    "type": "invalid_name",
+    "message": "That name was already taken. Did you already create the promo code?"
+  }
+}
