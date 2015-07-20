@@ -54,24 +54,6 @@ class Promotion(Utils):
             {},
             PromoCode)
 
-    def promo_code(self, name):
-        """Retrieve a promo code from AcceptOn
-
-        :param name: The name of the promo code to retrieve.
-        :type name: str.
-
-        :returns: PromoCode -- The retrieved promo code.
-        :raises: accepton.Error
-
-        :Example:
-
-        # Retrieve the promo code with the name "20OFF"
-        >> client.promo_code("20OFF")
-        """
-        return self.perform_get_with_object("/v1/promo_codes/%s" % name,
-                                            {},
-                                            PromoCode)
-
     def update_promo_code(self, promo_code):
         """Update a promo code on AcceptOn
 

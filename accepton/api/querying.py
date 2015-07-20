@@ -1,4 +1,5 @@
 from ..charge import Charge
+from ..promo_code import PromoCode
 from ..transaction_token import TransactionToken
 from .utils import Utils
 
@@ -36,6 +37,24 @@ class Querying(Utils):
         return self.perform_get_with_objects("/v1/charges",
                                              self.as_params(locals()),
                                              Charge)
+
+    def promo_code(self, name):
+        """Retrieve a promo code from AcceptOn
+
+        :param name: The name of the promo code to retrieve.
+        :type name: str.
+
+        :returns: PromoCode -- The retrieved promo code.
+        :raises: accepton.Error
+
+        :Example:
+
+        # Retrieve the promo code with the name "20OFF"
+        >> client.promo_code("20OFF")
+        """
+        return self.perform_get_with_object("/v1/promo_codes/%s" % name,
+                                            {},
+                                            PromoCode)
 
     def token(self, id):
         """Retrieves a transaction token from the API

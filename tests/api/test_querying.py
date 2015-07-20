@@ -4,6 +4,7 @@ from datetime import datetime
 from accepton import Client
 from accepton.charge import Charge
 from accepton.error import BadRequest, NotFound
+from accepton.promo_code import PromoCode
 from accepton.transaction_token import TransactionToken
 from tests import fixture_response
 
@@ -87,6 +88,37 @@ class UnsuccessfulChargeQueryTest(unittest.TestCase):
     def test_raises_bad_request_error(self):
         self.assertRaises(BadRequest,
                           lambda: self.client.charge(self.charge_id))
+
+
+class SuccessfulPromoCodeQueryTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client(api_key="skey_123")
+        url = "https://checkout.accepton.com/v1/promo_codes/20OFF"
+        httpretty.enable()
+        httpretty.register_uri(httpretty.GET,
+                               body=fixture_response("promo_code.json"),
+                               uri=url,
+                               status=200,
+                               content_type="application/json")
+
+    def tearDown(self):
+        httpretty.disable()
+        httpretty.reset()
+
+    def test_makes_a_request(self):
+        self.client.promo_code("20OFF")
+        self.assertEqual(httpretty.has_request(), True)
+
+    def test_returns_a_promo_code(self):
+        promo_code = self.client.promo_code("20OFF")
+        self.assertEqual(isinstance(promo_code, PromoCode), True)
+
+    def test_promo_code_initialized_correctly(self):
+        promo_code = self.client.promo_code("20OFF")
+        self.assertEqual(isinstance(promo_code.created_at, datetime), True)
+        self.assertEqual(promo_code.name, "20OFF")
+        self.assertEqual(promo_code.promo_type, "amount")
+        self.assertEqual(promo_code.value, 2000)
 
 
 class SuccessfulTokenQueryTest(unittest.TestCase):
