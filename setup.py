@@ -51,7 +51,7 @@ setup(
     description="AcceptOn Python library",
     long_description=local_file("README.rst"),
     classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 2",
