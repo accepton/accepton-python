@@ -12,7 +12,7 @@ Documentation
 
 Please see the `Python developer documentation`_ for more information.
 
-.. _Python developer documentation: http://developers.accepton.com/?ruby
+.. _Python developer documentation: http://developers.accepton.com/?python
 
 Installation
 ------------
