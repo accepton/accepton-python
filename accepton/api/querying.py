@@ -1,4 +1,5 @@
 from ..charge import Charge
+from ..transaction_token import TransactionToken
 from .utils import Utils
 
 
@@ -35,3 +36,16 @@ class Querying(Utils):
         return self.perform_get_with_objects("/v1/charges",
                                              self.as_params(locals()),
                                              Charge)
+
+    def token(self, id):
+        """Retrieves a transaction token from the API
+
+        :param id: The transaction token identifier.
+        :type id: str.
+
+        :returns TransactionToken -- The retrieved TransactionToken.
+        :raises: accepton.Error
+        """
+        return self.perform_get_with_object("/v1/tokens/%s" % id,
+                                            {},
+                                            TransactionToken)

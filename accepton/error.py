@@ -37,6 +37,10 @@ class Unauthorized(ClientError):
     """Raised when AcceptOn returns a 401 HTTP status code"""
 
 
+class NotFound(ClientError):
+    """Raised when AcceptOn returns a 404 HTTP status code"""
+
+
 class ServerError(Error):
     """Raised when AcceptOn returns a 5xx HTTP status code"""
 
@@ -60,6 +64,7 @@ class GatewayTimeout(ServerError):
 ERRORS = {
     400: BadRequest,
     401: Unauthorized,
+    404: NotFound,
     500: InternalServerError,
     502: BadGateway,
     503: ServiceUnavailable,

@@ -1,0 +1,6 @@
+{
+  "error": {
+    "type": "invalid_token",
+    "message": "The transaction token is invalid."
+  }
+}

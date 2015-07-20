@@ -3,7 +3,8 @@ import unittest
 from datetime import datetime
 from accepton import Client
 from accepton.charge import Charge
-from accepton.error import BadRequest
+from accepton.error import BadRequest, NotFound
+from accepton.transaction_token import TransactionToken
 from tests import fixture_response
 
 
@@ -86,3 +87,55 @@ class UnsuccessfulChargeQueryTest(unittest.TestCase):
     def test_raises_bad_request_error(self):
         self.assertRaises(BadRequest,
                           lambda: self.client.charge(self.charge_id))
+
+
+class SuccessfulTokenQueryTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client(api_key="skey_123")
+        self.token_id = "txn_b43a7e1e51410639979ab2047c156caa"
+        url = "https://checkout.accepton.com/v1/tokens/%s" % self.token_id
+        httpretty.enable()
+        httpretty.register_uri(httpretty.GET,
+                               url,
+                               body=fixture_response("token.json"),
+                               status=200,
+                               content_type="application/json")
+
+    def tearDown(self):
+        httpretty.disable()
+        httpretty.reset()
+
+    def test_makes_a_request(self):
+        self.client.token(self.token_id)
+        self.assertEqual(httpretty.has_request(), True)
+
+    def test_returns_a_token(self):
+        charge = self.client.token(self.token_id)
+        self.assertEqual(isinstance(charge, TransactionToken), True)
+
+    def test_charge_initialized_correctly(self):
+        charge = self.client.token(self.token_id)
+        self.assertEqual(charge.id, "txn_b43a7e1e51410639979ab2047c156caa")
+        self.assertEqual(charge.amount, 100)
+        self.assertEqual(charge.description, "Test Description")
+
+
+class UnsuccessfulTokenQueryTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client(api_key="skey_123")
+        self.token_id = "txn_b43a7e1e51410639979ab2047c156caa"
+        url = "https://checkout.accepton.com/v1/tokens/%s" % self.token_id
+        httpretty.enable()
+        httpretty.register_uri(httpretty.GET,
+                               url,
+                               body=fixture_response("invalid_token.json"),
+                               status=404,
+                               content_type="application/json")
+
+    def tearDown(self):
+        httpretty.disable()
+        httpretty.reset()
+
+    def test_raises_not_found_error(self):
+        self.assertRaises(NotFound,
+                          lambda: self.client.token(self.token_id))
