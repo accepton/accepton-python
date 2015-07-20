@@ -7,7 +7,12 @@ AcceptOn
    :target: https://circleci.com/gh/accepton/accepton-python
    :alt: Build Status
 
-Please see http://developers.accepton.com for more information.
+Documentation
+-------------
+
+Please see the `Python developer documentation`_ for more information.
+
+.. _Python developer documentation: http://developers.accepton.com/?ruby
 
 Installation
 ------------
