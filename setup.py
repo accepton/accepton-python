@@ -66,7 +66,7 @@ setup(
     keywords=[],
     author="AcceptOn",
     author_email="developers@accepton.com",
-    url="https://accepton.com",
+    url="http://developers.accepton.com",
     license="MIT",
     packages=find_packages(exclude=["*tests*"]),
     include_package_data=True,
