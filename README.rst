@@ -1,6 +1,12 @@
 AcceptOn
 ========
 
+|circleci|
+
+.. |circleci| image:: https://circleci.com/gh/accepton/accepton-python.svg?style=shield&circle-token=9a4878f9e5d7eb8ff1cbcfb863641772aa7e9005
+   :target: https://circleci.com/gh/accepton/accepton-python
+   :alt: Build Status
+
 Please see http://developers.accepton.com for more information.
 
 Installation
