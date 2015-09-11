@@ -1,0 +1,20 @@
+{
+    "object": "list",
+    "total": 2,
+    "data": [
+        {
+            "object": "promo_code",
+            "created_at": "2015-09-09T20:19:56.658+00:00",
+            "name": "TEST15",
+            "promo_type": "percentage",
+            "value": 0.15
+        },
+        {
+            "object": "promo_code",
+            "created_at": "2015-09-08T21:32:56.164+00:00",
+            "name": "TEST10",
+            "promo_type": "percentage",
+            "value": 0.10
+        }
+    ]
+}

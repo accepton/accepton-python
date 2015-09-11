@@ -121,6 +121,28 @@ class SuccessfulPromoCodeQueryTest(unittest.TestCase):
         self.assertEqual(promo_code.value, 2000)
 
 
+class SuccessfulPromoCodeSearchTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client(api_key="skey_123")
+        self.params = {}
+        httpretty.enable()
+        httpretty.register_uri(httpretty.GET,
+                               "https://checkout.accepton.com/v1/promo_codes",
+                               body=fixture_response("promo_codes_list.json"),
+                               status=200,
+                               content_type="application/json")
+
+    def tearDown(self):
+        httpretty.disable()
+        httpretty.reset()
+
+    def test_returns_the_list_of_promo_codes(self):
+        promo_codes = self.client.promo_codes()
+        self.assertEqual(len(promo_codes), 2)
+        for promo_code in promo_codes:
+            self.assertEqual(isinstance(promo_code, PromoCode), True)
+
+
 class SuccessfulTokenQueryTest(unittest.TestCase):
     def setUp(self):
         self.client = Client(api_key="skey_123")
