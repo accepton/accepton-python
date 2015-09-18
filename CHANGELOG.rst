@@ -7,8 +7,8 @@ this scheme are considered to be bugs.
 
 .. _Semantic Versioning 2.0.0: http://semver.org/spec/v2.0.0.html
 
-`Unreleased`_
--------------
+`0.2.0`_ - 2015-09-18
+---------------------
 
 Added
 ~~~~~
@@ -23,4 +23,5 @@ Added
 
 - Initial version.
 
-.. _Unreleased: https://github.com/accepton/accepton-python/compare/v0.1.0...HEAD
+.. _0.2.0: https://github.com/accepton/accepton-python/compare/v0.1.0...v0.2.0
+.. _Unreleased: https://github.com/accepton/accepton-python/compare/v0.2.0...HEAD
