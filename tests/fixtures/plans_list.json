@@ -1,0 +1,39 @@
+{
+  "object": "list",
+  "total": 3,
+  "data": [
+    {
+      "object": "plan",
+      "id": "pln_965d6898b660d85b",
+      "amount": 1000,
+      "created_at": "2015-08-21T20:20:14.690+00:00",
+      "currency": "usd",
+      "description": null,
+      "details_link": null,
+      "name": "Test Plan",
+      "period_unit": "month"
+    },
+    {
+      "object": "plan",
+      "id": "pln_a3abdc51bcff6b75",
+      "amount": 1500,
+      "created_at": "2015-08-31T15:07:19.560+00:00",
+      "currency": "usd",
+      "description": null,
+      "details_link": null,
+      "name": "Test Insight Plan",
+      "period_unit": "month"
+    },
+    {
+      "object": "plan",
+      "id": "pln_2f76b2ea5c8eca92",
+      "amount": 15000,
+      "created_at": "2015-08-31T15:08:20.087+00:00",
+      "currency": "usd",
+      "description": null,
+      "details_link": null,
+      "name": "New Plan",
+      "period_unit": "month"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "object": "plan",
+  "id": "pln_123",
+  "amount": 1000,
+  "created_at": "2015-08-21T20:20:14.690+00:00",
+  "currency": "usd",
+  "name": "Test Plan",
+  "period_unit": "month"
+}

@@ -1,4 +1,5 @@
 from ..charge import Charge
+from ..plan import Plan
 from ..promo_code import PromoCode
 from ..transaction_token import TransactionToken
 from .utils import Utils
@@ -37,6 +38,38 @@ class Querying(Utils):
         return self.perform_get_with_objects("/v1/charges",
                                              self.as_params(locals()),
                                              Charge)
+
+    def plan(self, id):
+        """Retrieves a plan from the API
+
+        :param id: The plan identifier.
+        :type id: str.
+
+        :returns Plan -- The retrieved Plan.
+        :raises: accepton.Error
+        """
+        return self.perform_get_with_object("/v1/recurring/plans/%s" % id,
+                                            {},
+                                            Plan)
+
+    def plans(self, order=None, order_by=None, page=None, per_page=None):
+        """Retrieves a page of plans from the API
+
+        :param order: The order to sort by (asc or desc).
+        :type order: str.
+        :param order_by: The field to order by (e.g. created_at).
+        :type order_by: str.
+        :param page: The page number to retrieve.
+        :type page: int.
+        :param per_page: The size of the page to retrieve (max: 100).
+        :type per_page: int.
+
+        :returns: List<Plan> -- The list of retrieves Plans.
+        :raises: accepton.Error
+        """
+        return self.perform_get_with_objects("/v1/recurring/plans",
+                                             self.as_params(locals()),
+                                             Plan)
 
     def promo_code(self, name):
         """Retrieve a promo code from AcceptOn

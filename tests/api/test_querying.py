@@ -4,6 +4,7 @@ from datetime import datetime
 from accepton import Client
 from accepton.charge import Charge
 from accepton.error import BadRequest, NotFound
+from accepton.plan import Plan
 from accepton.promo_code import PromoCode
 from accepton.transaction_token import TransactionToken
 from tests import fixture_response
@@ -88,6 +89,85 @@ class UnsuccessfulChargeQueryTest(unittest.TestCase):
     def test_raises_bad_request_error(self):
         self.assertRaises(BadRequest,
                           lambda: self.client.charge(self.charge_id))
+
+
+class SuccessfulPlanQueryTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client(api_key="skey_123")
+        self.plan_id = "pln_123"
+        url = ("https://checkout.accepton.com/v1/recurring/plans/%s" %
+               self.plan_id)
+        httpretty.enable()
+        httpretty.register_uri(httpretty.GET,
+                               url,
+                               body=fixture_response("plan.json"),
+                               status=200,
+                               content_type="application/json")
+
+    def tearDown(self):
+        httpretty.disable()
+        httpretty.reset()
+
+    def test_makes_a_request(self):
+        self.client.plan(self.plan_id)
+        self.assertEqual(httpretty.has_request(), True)
+
+    def test_returns_a_plan(self):
+        plan = self.client.plan(self.plan_id)
+        self.assertEqual(isinstance(plan, Plan), True)
+
+    def test_plan_initialized_correctly(self):
+        plan = self.client.plan(self.plan_id)
+        self.assertEqual(plan.amount, 1000)
+        self.assertEqual(isinstance(plan.created_at, datetime), True)
+        self.assertEqual(plan.name, "Test Plan")
+        self.assertEqual(plan.currency, "usd")
+        self.assertEqual(plan.period_unit, "month")
+
+
+class UnsuccessfulPlanQueryTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client(api_key="skey_123")
+        self.plan_id = "chg_123"
+        url = ("https://checkout.accepton.com/v1/recurring/plans/%s" %
+               self.plan_id)
+        httpretty.enable()
+        httpretty.register_uri(httpretty.GET,
+                               url,
+                               body=fixture_response("invalid_plan_id.json"),
+                               status=400,
+                               content_type="application/json")
+
+    def tearDown(self):
+        httpretty.disable()
+        httpretty.reset()
+
+    def test_raises_bad_request_error(self):
+        self.assertRaises(BadRequest,
+                          lambda: self.client.plan(self.plan_id))
+
+
+class SuccessfulPlanSearchTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client(api_key="skey_123")
+        self.params = {}
+        url = "https://checkout.accepton.com/v1/recurring/plans"
+        httpretty.enable()
+        httpretty.register_uri(httpretty.GET,
+                               url,
+                               body=fixture_response("plans_list.json"),
+                               status=200,
+                               content_type="application/json")
+
+    def tearDown(self):
+        httpretty.disable()
+        httpretty.reset()
+
+    def test_returns_the_list_of_plans(self):
+        plans = self.client.plans()
+        self.assertEqual(len(plans), 3)
+        for plan in plans:
+            self.assertEqual(isinstance(plan, Plan), True)
 
 
 class SuccessfulPromoCodeQueryTest(unittest.TestCase):

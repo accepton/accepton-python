@@ -1,0 +1,6 @@
+{
+  "error": {
+    "type": "invalid_plan_id",
+    "message": "translation missing: en.invalid_plan_id"
+  }
+}
