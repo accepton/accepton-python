@@ -17,6 +17,11 @@ Added
 - Added support for querying singular and lists of plans.
 - Added support for canceling subscriptions.
 
+Fixed
+~~~~~
+
+- Fixed GET requests to properly use the query string for their params.
+
 `0.2.0`_ - 2015-09-18
 ---------------------
 
