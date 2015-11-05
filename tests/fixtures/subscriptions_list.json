@@ -1,0 +1,54 @@
+{
+  "object": "list",
+  "total": 3,
+  "data": [
+    {
+      "email": "test1@email.com",
+      "active": true,
+      "object": "subscription",
+      "id": "sub_d6c25712a5a167f0",
+      "last_billed_at": "2015-08-21T22:43:34.096+00:00",
+      "plan": {
+        "object": "plan",
+        "id": "pln_965d6898b660d85b",
+        "amount": 1000,
+        "created_at": "2015-08-21T20:20:14.690Z",
+        "currency": "usd",
+        "name": "Test Plan",
+        "period_unit": "month"
+      }
+    },
+    {
+      "email": "test2@email.com",
+      "active": true,
+      "object": "subscription",
+      "id": "sub_bd500250b321c000",
+      "last_billed_at": "2015-08-21T22:33:37.049+00:00",
+      "plan": {
+        "object": "plan",
+        "id": "pln_965d6898b660d85b",
+        "amount": 1000,
+        "created_at": "2015-08-21T20:20:14.690Z",
+        "currency": "usd",
+        "name": "Test Plan",
+        "period_unit": "month"
+      }
+    },
+    {
+      "email": "test3@email.com",
+      "active": true,
+      "object": "subscription",
+      "id": "sub_2e5e5e1b819f62c4",
+      "last_billed_at": null,
+      "plan": {
+        "object": "plan",
+        "id": "pln_965d6898b660d85b",
+        "amount": 1000,
+        "created_at": "2015-08-21T20:20:14.690Z",
+        "currency": "usd",
+        "name": "Test Plan",
+        "period_unit": "month"
+      }
+    }
+  ]
+}

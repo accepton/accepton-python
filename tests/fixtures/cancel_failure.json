@@ -1,0 +1,6 @@
+{
+  "error": {
+    "type": "unable_to_cancel_subscription",
+    "message": "Unable to cancel subscription with that ID."
+  }
+}

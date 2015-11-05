@@ -15,6 +15,7 @@ Added
 
 - Added support for creating plans.
 - Added support for querying singular and lists of plans.
+- Added support for canceling subscriptions.
 
 `0.2.0`_ - 2015-09-18
 ---------------------
