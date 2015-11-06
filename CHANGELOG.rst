@@ -7,6 +7,11 @@ this scheme are considered to be bugs.
 
 .. _Semantic Versioning 2.0.0: http://semver.org/spec/v2.0.0.html
 
+`Unreleased`_
+-------------
+
+- Nothing yet.
+
 `0.3.0`_ - 2015-11-06
 ---------------------
 
