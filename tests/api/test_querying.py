@@ -6,6 +6,7 @@ from accepton.charge import Charge
 from accepton.error import BadRequest, NotFound
 from accepton.plan import Plan
 from accepton.promo_code import PromoCode
+from accepton.subscription import Subscription
 from accepton.transaction_token import TransactionToken
 from tests import fixture_response
 
@@ -221,6 +222,69 @@ class SuccessfulPromoCodeSearchTest(unittest.TestCase):
         self.assertEqual(len(promo_codes), 2)
         for promo_code in promo_codes:
             self.assertEqual(isinstance(promo_code, PromoCode), True)
+
+
+class SuccessfulSubscriptionSearchTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client(api_key="skey_123")
+        self.params = {"plan_token": "pln_965d6898b660d85b"}
+        url = "https://checkout.accepton.com/v1/recurring/subscriptions"
+        httpretty.enable()
+        httpretty.register_uri(httpretty.GET,
+                               url,
+                               body=fixture_response("subscriptions.json"),
+                               status=200,
+                               content_type="application/json")
+
+    def tearDown(self):
+        httpretty.disable()
+        httpretty.reset()
+
+    def test_returns_the_list_of_subscriptions(self):
+        subscriptions = self.client.subscriptions(**self.params)
+        self.assertEqual(len(subscriptions), 1)
+        for subscription in subscriptions:
+            self.assertEqual(isinstance(subscription, Subscription), True)
+
+    def test_plan_token_converted_successfully(self):
+        self.client.subscriptions(**self.params)
+        self.assertEqual(httpretty.last_request().querystring,
+                         {"plan.token": ["pln_965d6898b660d85b"]})
+
+
+class SuccessfulSubscriptionQueryTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client(api_key="skey_123")
+        self.subscription_id = "sub_123"
+        url = ("https://checkout.accepton.com/v1/recurring/subscriptions/%s" %
+               self.subscription_id)
+        httpretty.enable()
+        httpretty.register_uri(httpretty.GET,
+                               url,
+                               body=fixture_response("subscription.json"),
+                               status=200,
+                               content_type="application/json")
+
+    def tearDown(self):
+        httpretty.disable()
+        httpretty.reset()
+
+    def test_makes_a_request(self):
+        self.client.subscription(self.subscription_id)
+        self.assertEqual(httpretty.has_request(), True)
+
+    def test_returns_a_subscription(self):
+        subscription = self.client.subscription(self.subscription_id)
+        self.assertEqual(isinstance(subscription, Subscription), True)
+
+    def test_subscription_initialized_correctly(self):
+        sub = self.client.subscription(self.subscription_id)
+        self.assertEqual(sub.active, False)
+        self.assertEqual(sub.email, "test1@email.com")
+        self.assertEqual(sub.id, "sub_123")
+        self.assertEqual(isinstance(sub.last_billed_at, datetime), True)
+        self.assertEqual(isinstance(sub.plan, Plan), True)
+        self.assertEqual(sub.plan.id, "pln_965d6898b660d85b")
 
 
 class SuccessfulTokenQueryTest(unittest.TestCase):

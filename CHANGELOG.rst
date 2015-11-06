@@ -16,6 +16,7 @@ Added
 - Added support for creating plans.
 - Added support for querying singular and lists of plans.
 - Added support for canceling subscriptions.
+- Added support for querying singular and lists of subscriptions.
 
 Fixed
 ~~~~~

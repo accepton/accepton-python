@@ -1,6 +1,7 @@
 from ..charge import Charge
 from ..plan import Plan
 from ..promo_code import PromoCode
+from ..subscription import Subscription
 from ..transaction_token import TransactionToken
 from .utils import Utils
 
@@ -110,6 +111,47 @@ class Querying(Utils):
         return self.perform_get_with_objects("/v1/promo_codes",
                                              self.as_params(locals()),
                                              PromoCode)
+
+    def subscription(self, id):
+        """Retrieves a subscription from AcceptOn
+
+        :param id: The subscription identifier.
+        :type id: str.
+
+        :returns: Subscription -- The retrieved Subscription.
+        :raises: accepton.Error
+        """
+        url = "/v1/recurring/subscriptions/%s" % id
+        return self.perform_get_with_object(url, {}, Subscription)
+
+    def subscriptions(self, active=None, order=None, order_by=None, page=None,
+                      per_page=None, period_unit=None, plan_token=None):
+        """Retrieves a page of subscriptions from AcceptOn
+
+        :param active: Whether to filter for active or inactive subscriptions.
+        :type active: bool.
+        :param order: The order to sort by (asc or desc).
+        :type order: str.
+        :param order_by: The field to order by (e.g. created_at).
+        :type order_by: str.
+        :param page: The page number to retrieve.
+        :type page: int.
+        :param per_page: The size of the page to retrieve (max: 100).
+        :type per_page: int.
+        :param plan_token: The plan id to filter by.
+        :type plan_token: str.
+
+        :raise [AcceptOn::Error]
+        :returns List<Subscription> -- The list of retrieved Subscriptions.
+        """
+        params = self.as_params(locals())
+        if params["plan_token"] is not None:
+            params["plan.token"] = params["plan_token"]
+            params["plan_token"] = None
+
+        return self.perform_get_with_objects("/v1/recurring/subscriptions",
+                                             params,
+                                             Subscription)
 
     def token(self, id):
         """Retrieves a transaction token from the API
