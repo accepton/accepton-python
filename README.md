@@ -4,19 +4,8 @@
 [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/accepton/accepton-python/blob/master/LICENSE)
 [![Follow AcceptOn](https://img.shields.io/twitter/follow/acceptonhq.svg?style=social)](https://twitter.com/AcceptOnHQ)
 
-
 # What is this?
-The [AcceptOn](https://accepton.com) *DynamicKit* for monty-pythoners.  Used for your backend integration with AcceptOn.
-
-### Features
-  - [x] Generate goods dynamically
-  - [x] Verify that a charge completed and for the correct amount
-  - [x] List and search charges
-  - [x] Refund a charge
-  - [x] Create, read, and list plans
-  - [x] Cancel, retrieve, and list subscriptions
-  - [x] CRUD promo-codes
-
+The [AcceptOn](https://accepton.com) *DynamicKit* for pythoners.  Used for your backend integration with AcceptOn.
 
 ## Setup
 
@@ -25,25 +14,9 @@ The [AcceptOn](https://accepton.com) *DynamicKit* for monty-pythoners.  Used for
 >pip install accepton
 ```
 
-#### 2. Initialize the client
-```python
-from accepton import Client
-
-#Located under 'My Profile' in your accepton.com dashboard
-ACCEPTON_SECRET_KEY = 'skey_xxxx'
-
-#The environment may be either 'production' or 'staging'
-client = Client(api_key=ACCEPTON_SECRET_KEY, environment='staging')
-```
-
-#### 3. Pick an example
-
- - [A RESTful service that auto-configures `CheckoutKit` and verifies the charge](./docs/RESTful_example.md)
- - [Listing charges for a particular date range](./docs/listing_charges.md)
- - [Refunding a charge](./docs/refund_charge.md)
- - [Create, read, and list plans](./docs/plans.md)
- - [Cancel, retrieve, and list subscriptions](./docs/subscriptions.md)
- - [CRUD promo-codes](./docs/promo.md)
+#### 2. Continue with the documentation
+  - [Dynamic Kit Getting Started Guide](http://developers.accepton.com/guides/dynamic_kit.html)
+  - [Dynamic Kit Full API Reference](http://developers.accepton.com/guides/dynamic_kit_full_api.html)
 
 ## Contributing
 > ♥ This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
